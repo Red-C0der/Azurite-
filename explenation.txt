@@ -1,0 +1,28 @@
+
+Security_Level: Level of security a Process/Protocol has.
+ 1: Normal
+ 2: Access to System-Information
+ 3: Socket connection
+ 4: Access to System-Files
+ 5: Access to System
+
+Running_Rights: Rights a Process/Protocol has.
+ norm: Access to Output, Input, Logs, tmp
+ arch: Access to norm + Archives
+ sett: Access to norm + settings
+ sockconn: Access is after user has logged in over socket connection
+ super: Access to !!EVERYTHING!!
+
+
+Socket: Socket things.
+ sender to server command-formatting:        [sender];[command];[args]
+
+        sender = "name" of sending device
+        command = what the system should do EX --> [csprint] / [cprint] : Colored Output
+        args = command args like what the cs / cprint command should print!
+
+ server to sender command-formatting:        [send/recv];[message];[state]
+
+        send / recv = if server send the message end is waiting for more input use send | if server send the message but will send more things later use recv
+        message = message the client should display
+        state = message state (info, warning, error ...)
