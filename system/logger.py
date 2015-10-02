@@ -23,4 +23,5 @@ def write(level, message, LogFile=""):
     if level == "d":
         logging.debug(message)
     if level != "i" and level != "w" and level != "e" and level != "c" and level != "ex" and level != "d":
-        logging.exception("Logging level [" + level +  "] not recognized!")
+        import inspect
+        logging.exception("Function " + inspect.stack()[1][3] + " tried to use logger.write() with invalid logging level " + level +  " !")

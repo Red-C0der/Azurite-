@@ -22,7 +22,7 @@ __author__ = 'Red_C0der'
 #   \=============================================================================/
 
 class VarKeeper:
-    version = "0.0.2"
+    version = "0.0.1"
     s_key = ""
     trusted_hosts = {}
     host = "127.0.0.1"
@@ -508,39 +508,29 @@ class Multiprocessing:
 class Security:
 
     def savekey(self, key):
-        print "Skey: "+key
         import logger as logger
+        import cfgfileparser as cfg
         loggerloc = "File: main.py | Class: Security | Function: savekey | "
         logger.write("i", loggerloc+"Start saving security key!")
         try:
-            keyfile = open("../settings/keyfile.cfg", "w")
+            cfg.set("s_key", key)
         except:
-            logger.write("e", loggerloc+"Could not open /setting/keyfile.cfg !")
+            logger.write("e", loggerloc+"Could not call cfgfileparser.set() !")
             return False
-        try:
-            keyfile.write(str(key))
-        except:
-            logger.write("e", loggerloc+"Could not write key to file /setting/keyfile.cfg !")
-            return False
-        keyfile.close()
-        logger.write("i", loggerloc+"Written key to file /setting/keyfile.cfg")
+        logger.write("i", loggerloc+"Written key to file!")
         return True
 
     def loadkey(self):
         import logger as logger
+        import cfgfileparser as cfg
         loggerloc = "File: main.py | Class: Security | Function: loadkey | "
         logger.write("i", loggerloc+"Start loading security key!")
         try:
-            keyfile = open("../settings/keyfile.cfg", "r")
+            key = cfg.get("s_key")
         except:
-            logger.write("e", loggerloc+"Could not open /setting/keyfile.cfg !")
+            logger.write("e", loggerloc+"Could not call cfgfileparser.get() !")
             return False
-        try:
-            key = keyfile.read()
-        except:
-            logger.write("e", loggerloc+"Could not read file /setting/keyfile.cfg !")
-            return False
-        logger.write("i", loggerloc+"Loaded key from file /setting/keyfile.cfg")
+        logger.write("i", loggerloc+"Loaded key!")
         return key
 
     def newkey(self):
