@@ -9,10 +9,16 @@ voicedb = voice.LoadVoiceDB()
 print ""
 print ""
 print ""
+
+for i in range(20):
+    voice.RecWaveFile(i)
+    voice.GetSpeakers(voicedb, "../tmp/"+str(i)+".wav")
+    voice.CleanUp(str(i))
+    time.sleep(1)
 #voice.ReadWaveFile("voice.wav")
 
-print voice.GetSpeakers(voicedb, "voice.wav")
-voice.CleanUp("voice")
+#print voice.GetSpeakers(voicedb, "voice.wav")
+#voice.CleanUp("voice")
 
 
 #main.Startup.startup()

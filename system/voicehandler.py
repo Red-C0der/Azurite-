@@ -16,7 +16,7 @@ def LoadVoiceDB(path="../voicedb"):
     logger.write("i", "File: voicehandler.py | Function: LoadVoiceDB | Info: New VoiceDatabase was created!")
     return db
 
-def AddWaveFile(voicedb, Speaker_Name, WavFile_Path, db_path="../voicedb"):
+def AddWaveFile(voicedb, Speaker_Name, WavFile_Path):
     from voiceid.sr import Voiceid
     from voiceid.db import GMMVoiceDB
     import logger
@@ -54,11 +54,9 @@ def GetSpeakers(voicedb, audiofile):
     try:
         for c in v.get_clusters():
             cluster = v.get_cluster(c)
-            print "Best Speaker: "+cluster.get_best_speaker()
-            v.set_maxthreads(5)
             voicedb.set_maxthreads(5)
     except:
-        logger.write("e", "File: voicehandler.py | Function: GetSpeakers | Error: Could not list cluster segments into cluster_dict !")
+        logger.write("e", "File: voicehandler.py | Function: GetSpeakers | Error: Could not get clusters!")
         return False
     return cluster
 
@@ -66,11 +64,11 @@ def CleanUp(audiofile_no_suffix, file_suffix=".wav"):
     import os
     import logger
     try:
-        os.system("rm "+audiofile_no_suffix+file_suffix)
-        os.system("rm "+audiofile_no_suffix+"_"+file_suffix)
-        os.system("rm "+audiofile_no_suffix+"_"+".seg")
-        os.system("rm "+audiofile_no_suffix+"_.c.gmm")
-        os.system("rm -rf "+audiofile_no_suffix+"_")
+        os.system("rm ../tmp/"+audiofile_no_suffix+file_suffix)
+        os.system("rm ../tmp/"+audiofile_no_suffix+"_"+file_suffix)
+        os.system("rm ../tmp/"+audiofile_no_suffix+"_"+".seg")
+        os.system("rm ../tmp/"+audiofile_no_suffix+"_.c.gmm")
+        os.system("rm -rf ../tmp/"+audiofile_no_suffix+"_")
     except:
         logger.write("e", "File: voicehandler.py | Function: CleanUp | Error: Something went wrong during cleanup!")
         return False
