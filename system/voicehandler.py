@@ -1,8 +1,8 @@
 __author__ = 'Red_C0der'
 
 def LoadVoiceDB(path="../voicedb"):
-    #from voiceid.sr import Voiceid
-    #from voiceid.db import GMMVoiceDB
+    from voiceid.sr import Voiceid
+    from voiceid.db import GMMVoiceDB
     import logger
     try:
         db = GMMVoiceDB(str(path))
@@ -13,8 +13,8 @@ def LoadVoiceDB(path="../voicedb"):
     return db
 
 def AddWaveFile(voicedb, Speaker_Name, WavFile_Path, db_path="../voicedb"):
-    #from voiceid.sr import Voiceid
-    #from voiceid.db import GMMVoiceDB
+    from voiceid.sr import Voiceid
+    from voiceid.db import GMMVoiceDB
     import logger
     try:
         voicedb.add_model(WavFile_Path, Speaker_Name)
@@ -24,8 +24,8 @@ def AddWaveFile(voicedb, Speaker_Name, WavFile_Path, db_path="../voicedb"):
     return True
 
 def PrintDatabase(voicedb):
-    #from voiceid.sr import Voiceid
-    #from voiceid.db import GMMVoiceDB
+    from voiceid.sr import Voiceid
+    from voiceid.db import GMMVoiceDB
     import logger
     try:
         return voicedb.get_speakers()
@@ -34,8 +34,8 @@ def PrintDatabase(voicedb):
         return False
 
 def GetSpeakers(voicedb, audiofile):
-    #from voiceid.sr import Voiceid
-    #from voiceid.db import GMMVoiceDB
+    from voiceid.sr import Voiceid
+    from voiceid.db import GMMVoiceDB
     import logger
     try:
         v = Voiceid(voicedb, audiofile)
