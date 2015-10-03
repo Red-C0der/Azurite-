@@ -54,8 +54,8 @@ def GetSpeakers(voicedb, audiofile):
     try:
         for c in v.get_clusters():
             cluster = v.get_cluster(c)
-            segments = cluster.get_segments()
-            print segments
+            print "Best Speaker: "+cluster.get_best_speaker()
+            voicedb.set_maxthreads(5)
     except:
         logger.write("e", "File: voicehandler.py | Function: GetSpeakers | Error: Could not list cluster segments into cluster_dict !")
         return False
