@@ -48,12 +48,10 @@ def GetSpeakers(voicedb, audiofile):
         logger.write("e", "File: voicehandler.py | Function: GetSpeakers | Error: Could not extract speakers from file!")
         return False
     try:
-        cluster_dict = {}
         for c in v.get_clusters():
             cluster = v.get_cluster(c)
             segments = cluster.print_segments()
-            cluster_dict[cluster] = segments
     except:
         logger.write("e", "File: voicehandler.py | Function: GetSpeakers | Error: Could not list cluster segments into cluster_dict !")
         return False
-    return cluster_dict
+    return cluster
