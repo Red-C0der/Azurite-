@@ -10,7 +10,7 @@ print ""
 print ""
 print ""
 print voice.GetSpeakers(voicedb, "voice.wav")
-
+voice.CleanUp("voice")
 
 
 #main.Startup.startup()

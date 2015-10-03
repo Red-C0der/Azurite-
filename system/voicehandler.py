@@ -55,3 +55,16 @@ def GetSpeakers(voicedb, audiofile):
         logger.write("e", "File: voicehandler.py | Function: GetSpeakers | Error: Could not list cluster segments into cluster_dict !")
         return False
     return cluster
+
+def CleanUp(audiofile_no_suffix, file_suffix=".wav"):
+    import os
+    try:
+        os.system("rm "+audiofile_no_suffix+file_suffix)
+        os.system("rm "+audiofile_no_suffix+"_"+file_suffix)
+        os.system("rm "+audiofile_no_suffix+"_"+".seg")
+        os.system("rm "+audiofile_no_suffix+"_.c.gmm")
+        os.system("rm -rf "+audiofile_no_suffix+"_")
+    except:
+        logger.write("e", "File: voicehandler.py | Function: CleanUp | Error: Something went wrong during cleanup!")
+        return False
+    return True
