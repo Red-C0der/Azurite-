@@ -22,6 +22,11 @@ sudo python setup.py install
 
 # SpeechRecognition
 
+git clone http://github.com/wit-ai/pywit
+cd pywit
+python setup.py build
+sudo python setup.py install
+
 pip install SpeechRecognition
 sudo apt-get install python-pyaudio python3-pyaudio
 

@@ -76,17 +76,22 @@ def CleanUp(audiofile_no_suffix, file_suffix=".wav"):
 #       Voice Recognition
 
 def ReadWaveFile(audiofile):
-    import speech_recognition as sr
-    from os import path
-    WAV_FILE = path.join(path.dirname(path.realpath(__file__)), audiofile)
-    r = sr.Recognizer()
-    with sr.WavFile(WAV_FILE) as source:
-        audio = r.record(source)
-        #audio = r.listen(source)
-    WIT_AI_KEY = "6XOP44GCJXHL7S5FTM5CRMZIRRK5RHWC"
-    try:
-        print("Wit.ai thinks you said " + r.recognize_wit(audio, key=WIT_AI_KEY))
-    except sr.UnknownValueError:
-        print("Wit.ai could not understand audio")
-    except sr.RequestError as e:
-        print("Could not request results from Wit.ai service; {0}".format(e))
+    import os
+    tmp1 = "curl -XPOST "
+    tmp2 = "'https://api.wit.ai/speech?v=20141022' "
+    tmp3 = '-i -L -H "Authorization: Bearer ZKYKO52PUDWOFXHCFVFW6VEIIY4YPYK6" -H "Content-Type: audio/wav" --data-binary "@voice.wav"'
+    os.system(tmp1+tmp2+tmp3)
+    #import speech_recognition as sr
+    #from os import path
+    #WAV_FILE = path.join(path.dirname(path.realpath(__file__)), audiofile)
+    #r = sr.Recognizer()
+    #with sr.WavFile(WAV_FILE) as source:
+    #    audio = r.record(source)
+    #    #audio = r.listen(source)
+    #WIT_AI_KEY = "6XOP44GCJXHL7S5FTM5CRMZIRRK5RHWC"
+    #try:
+    #    print("Wit.ai thinks you said " + r.recognize_wit(audio, key=WIT_AI_KEY))
+    #except sr.UnknownValueError:
+    #    print("Wit.ai could not understand audio")
+    #except sr.RequestError as e:
+    #    print("Could not request results from Wit.ai service; {0}".format(e))
