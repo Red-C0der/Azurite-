@@ -83,7 +83,7 @@ def ReadWaveFile(audiofile):
     with sr.WavFile(WAV_FILE) as source:
         audio = r.record(source)
         #audio = r.listen(source)
-    WIT_AI_KEY = "ZKYKO52PUDWOFXHCFVFW6VEIIY4YPYK6"
+    WIT_AI_KEY = "6XOP44GCJXHL7S5FTM5CRMZIRRK5RHWC"
     try:
         print("Wit.ai thinks you said " + r.recognize_wit(audio, key=WIT_AI_KEY))
     except sr.UnknownValueError:
