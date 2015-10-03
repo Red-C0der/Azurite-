@@ -1,0 +1,29 @@
+# General Python library's
+
+pip install termcolor
+pip install colored
+
+
+=========================
+
+# SpeechRecognition and differentiation
+
+sudo apt-get install python2.7 python-wxgtk2.8 openjdk-7-jdk gstreamer0.10-plugins-base
+     gstreamer0.10-plugins-good gstreamer0.10-plugins-bad gstreamer0.10-plugins-ugly
+     gstreamer-tools sox mplayer python-setuptools
+
+sudo easy_install MplayerCtrl
+( sudo apt-get install subversion )
+svn checkout http://voiceid.googlecode.com/svn/trunk voiceid
+cd voiceid
+sudo python setup.py install
+
+=========================
+
+          # Audio Setup
+
+          apt-get install alsa-utils
+          apt-get install lame
+
+
+=========================

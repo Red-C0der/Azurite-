@@ -3,8 +3,17 @@ __author__ = 'Maximilian_H'
 import main
 import time
 import cryptographer as cr
+import voicehandler as voice
 
-main.Startup.startup()
+voicedb = voice.LoadVoiceDB()
+print ""
+print ""
+print ""
+print voice.GetSpeakers(voicedb, "voice.wav")
+
+
+
+#main.Startup.startup()
 
 #main.VarKeeper.s_key = main.Security.loadkey()
 #print "SKey: "+str(main.VarKeeper.s_key)
