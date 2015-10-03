@@ -11,10 +11,15 @@ print ""
 print ""
 
 for i in range(20):
+    print "Recording"
     voice.RecWaveFile(i)
+    print "Analyzing"
     voice.GetSpeakers(voicedb, "../tmp/"+str(i)+".wav")
+    times.sleep(4)
+    print "Cleanup"
     voice.CleanUp(str(i))
-    time.sleep(1)
+    time.sleep(4)
+    print "New File"
 #voice.ReadWaveFile("voice.wav")
 
 #print voice.GetSpeakers(voicedb, "voice.wav")
