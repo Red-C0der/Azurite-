@@ -1,5 +1,8 @@
 __author__ = 'Red_C0der'
 
+
+#       Voice Differentiation
+
 def LoadVoiceDB(path="../voicedb"):
     from voiceid.sr import Voiceid
     from voiceid.db import GMMVoiceDB
@@ -68,3 +71,22 @@ def CleanUp(audiofile_no_suffix, file_suffix=".wav"):
         logger.write("e", "File: voicehandler.py | Function: CleanUp | Error: Something went wrong during cleanup!")
         return False
     return True
+
+
+#       Voice Recognition
+
+def ReadWaveFile(audiofile):
+    import speech_recognition as sr
+    from os import path
+    WAV_FILE = path.join(path.dirname(path.realpath(__file__)), audiofile)
+    r = sr.Recognizer()
+    with sr.WavFile(WAV_FILE) as source:
+        audio = r.record(source)
+        #audio = r.listen(source)
+    WIT_AI_KEY = "ZKYKO52PUDWOFXHCFVFW6VEIIY4YPYK6"
+    try:
+        print("Wit.ai thinks you said " + r.recognize_wit(audio, key=WIT_AI_KEY))
+    except sr.UnknownValueError:
+        print("Wit.ai could not understand audio")
+    except sr.RequestError as e:
+        print("Could not request results from Wit.ai service; {0}".format(e))

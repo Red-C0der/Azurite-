@@ -6,7 +6,7 @@ pip install colored
 
 =========================
 
-# SpeechRecognition and differentiation
+# Differentiation
 
 sudo apt-get install python2.7 python-wxgtk2.8 openjdk-7-jdk gstreamer0.10-plugins-base
      gstreamer0.10-plugins-good gstreamer0.10-plugins-bad gstreamer0.10-plugins-ugly
@@ -19,6 +19,15 @@ cd voiceid
 sudo python setup.py install
 
 =========================
+
+# SpeechRecognition
+
+pip install SpeechRecognition
+sudo apt-get install python-pyaudio python3-pyaudio
+
+
+=========================
+
 
           # Audio Setup
 
