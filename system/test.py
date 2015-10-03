@@ -5,14 +5,14 @@ import time
 import cryptographer as cr
 import voicehandler as voice
 
-#voicedb = voice.LoadVoiceDB()
+voicedb = voice.LoadVoiceDB()
 print ""
 print ""
 print ""
-voice.ReadWaveFile("voice.wav")
+#voice.ReadWaveFile("voice.wav")
 
-#print voice.GetSpeakers(voicedb, "voice.wav")
-#voice.CleanUp("voice")
+print voice.GetSpeakers(voicedb, "voice.wav")
+voice.CleanUp("voice")
 
 
 #main.Startup.startup()

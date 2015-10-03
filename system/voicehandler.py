@@ -54,6 +54,7 @@ def GetSpeakers(voicedb, audiofile):
         for c in v.get_clusters():
             cluster = v.get_cluster(c)
             segments = cluster.print_segments()
+            print segments
     except:
         logger.write("e", "File: voicehandler.py | Function: GetSpeakers | Error: Could not list cluster segments into cluster_dict !")
         return False
@@ -61,6 +62,7 @@ def GetSpeakers(voicedb, audiofile):
 
 def CleanUp(audiofile_no_suffix, file_suffix=".wav"):
     import os
+    import logger
     try:
         os.system("rm "+audiofile_no_suffix+file_suffix)
         os.system("rm "+audiofile_no_suffix+"_"+file_suffix)
@@ -75,23 +77,31 @@ def CleanUp(audiofile_no_suffix, file_suffix=".wav"):
 
 #       Voice Recognition
 
-def ReadWaveFile(audiofile):
+def ReadWaveFile(audiofile, google_api_key=""):
+    import speech_recognition as sr
+    from os import path
+    WAV_FILE = path.join(path.dirname(path.realpath(__file__)), audiofile)
+    r = sr.Recognizer()
+    with sr.WavFile(WAV_FILE) as source:
+        audio = r.record(source)
+        #audio = r.listen(source)
+    try:
+        if google_api_key == "":
+            return r.recognize_google(audio)
+        else:
+            return r.recognize_google(audio, key=google_api_key)
+    except sr.UnknownValueError:
+        return "audio=null"
+        #print("Google Speech Recognition could not understand audio")
+    except sr.RequestError as e:
+        return "request=error"
+        #print("Could not request results from Google Speech Recognition service; {0}".format(e))
+
+def RecWaveFile(file_name_no_suffix):
     import os
-    tmp1 = "curl -XPOST "
-    tmp2 = "'https://api.wit.ai/speech?v=20141022' "
-    tmp3 = '-i -L -H "Authorization: Bearer ZKYKO52PUDWOFXHCFVFW6VEIIY4YPYK6" -H "Content-Type: audio/wav" --data-binary "@voice.wav"'
-    os.system(tmp1+tmp2+tmp3)
-    #import speech_recognition as sr
-    #from os import path
-    #WAV_FILE = path.join(path.dirname(path.realpath(__file__)), audiofile)
-    #r = sr.Recognizer()
-    #with sr.WavFile(WAV_FILE) as source:
-    #    audio = r.record(source)
-    #    #audio = r.listen(source)
-    #WIT_AI_KEY = "6XOP44GCJXHL7S5FTM5CRMZIRRK5RHWC"
-    #try:
-    #    print("Wit.ai thinks you said " + r.recognize_wit(audio, key=WIT_AI_KEY))
-    #except sr.UnknownValueError:
-    #    print("Wit.ai could not understand audio")
-    #except sr.RequestError as e:
-    #    print("Could not request results from Wit.ai service; {0}".format(e))
+    try:
+        os.system("arecord -f cd -d 3 -t raw | lame -x -r – ../tmp/"+file_name_no_suffix+".mp3")
+        os.system("mpg123 -w ../tmp/"+file_name_no_suffix+".wav ../tmp/"+file_name_no_suffix+".mp3")
+    except:
+        return False
+    return True
